@@ -1,0 +1,15 @@
+#logo {
+    max-height: 50px; /* Ajusta la altura del logo */
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem; /* Ajuste de padding */
+}
+
+.nav-link:hover {
+    color: #ffd700 !important; /* Color dorado al pasar el mouse */
+}
+
+.btn {
+    border-radius: 20px; /* Bordes redondeados en botones */
+}

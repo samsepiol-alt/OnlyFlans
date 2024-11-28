@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{%block title%} Carrito de compra - {{user.get_username}} - OnlyFlans{%endblock%}
+
+{%block content %} 
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Carrito de Compras</h2>
+    <div class="list-group">
+        {% for item in cart_items %}
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ item.product.name }}</strong><br>
+                    <small>${{ item.product.price }} x {{ item.quantity }}</small>
+                </div>
+                <div>
+                    <span class="badge bg-secondary">${{ item.total_price }}</span>
+                    <a class="btn btn-danger btn-sm ms-2" href="{% url 'remove_from_cart' item.id %}">Eliminar</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="list-group-item text-center">El carrito está vacío.</div>
+        {% endfor %}
+    </div>
+
+    <div class="text-end mt-3">
+        <h4>Total: <span class="text-success">${{ total }}</span></h4>
+    </div>
+
+    <div class="text-center mt-4">
+        <a class="btn btn-outline-primary me-2" href="{% url 'index' %}">Ver productos públicos</a>
+        <a class="btn btn-outline-success me-2" href="{% url 'welcome' %}">Ver productos privados</a> <!-- Para usuarios autenticados -->
+    </div>
+</div>
+
+
+
+{%endblock%}

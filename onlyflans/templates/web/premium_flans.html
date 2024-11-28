@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{%load custom_filters %}
+{%block title%}Premium - OnlyFlans{%endblock%}
+{% block content %}
+<div class="container text-justify text-light">
+    <h1>Flanes Premium</h1>
+
+        {% for flan in premium_flans %}
+        {%if forloop.counter0|divisibleby:3 or forloop.counter0 == 0 %}
+        <div class="row pt-5">    
+      {%endif%}
+      
+          <div class =" col-12 col-sm-12 col-md-4 col-lg-4 col-xs-12 pb-5">
+            <div class="card bg-dark">
+                <img src="{{flan.image_url}}" class="card-img-top" alt="card-img-top">
+                <div class="card-header">
+                  {{flan.name}}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Descripcion:</h5>
+                  <p class="card-text">{{flan.descripcion}}.</p>
+                  <p class="card-text">{{ flan.price|currency_format }}.</p>
+                  <a href="{% url 'add_to_cart' flan.id %}" class="btn btn-primary">Agregar</a>
+                </div>
+              </div>
+          </div>
+
+      {%if forloop.counter0|divisibleby:3 and forloop.counter0 != 0 %}
+    
+
+        </div>
+      {%endif%}
+        {% empty %}
+            <li>No hay flanes premium disponibles.</li>
+        {% endfor %}
+
+
+</div>
+{% endblock %}
