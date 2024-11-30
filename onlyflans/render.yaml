@@ -1,0 +1,22 @@
+databases:
+  - name: DATABASE_NAME
+    plan: free
+    databaseName: DATABASE_NAME
+    user: DATABASE_USER
+
+services:
+  - type: web
+    plan: free
+    name: onlyflans
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn onlyflans.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mysitedb
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
